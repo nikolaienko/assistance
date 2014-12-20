@@ -19,6 +19,7 @@ package dao;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import models.Device;
 import models.User;
 import ninja.jpa.UnitOfWork;
 
@@ -26,18 +27,38 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class UserDao {
-    
+
+
     @Inject
     Provider<EntityManager> entityManagerProvider;
-    
     @UnitOfWork
-    public boolean isUserAndPasswordValid(String username, String password) {
+    public boolean isDeviceExist(String login, Long deviceId){
+        EntityManager entityManager = entityManagerProvider.get();
+        Query q = entityManager.createQuery("SELECT x FROM User x WHERE login = :usernameParam");
+        User user = (User) q.setParameter("usernameParam", login).getSingleResult();
+        Query d = entityManager.createQuery("SELECT x FROM Device x WHERE userId = :userIdParam AND deviceId =:deviceParam");
+        Device device =
+                (Device) d.setParameter("userIdParam",user.id).setParameter("deviceParam",deviceId).getSingleResult();
+        return (device==null)?false:true;
+    }
+    @UnitOfWork
+    public boolean pairDevice(String login, Device device){
+        EntityManager entityManager = entityManagerProvider.get();
+        Query q = entityManager.createQuery("SELECT x FROM User x WHERE login = :usernameParam");
+        User user = (User) q.setParameter("usernameParam", login).getSingleResult();
+        device.userId = user.id;
+        entityManager.persist(device);
+        return true;
+    }
+
+    @UnitOfWork
+    public boolean isUserAndPasswordValid(String username, Long password) {
         
         if (username != null && password != null) {
             
             EntityManager entityManager = entityManagerProvider.get();
             
-            Query q = entityManager.createQuery("SELECT x FROM User x WHERE username = :usernameParam");
+            Query q = entityManager.createQuery("SELECT x FROM User x WHERE login = :usernameParam");
             User user = (User) q.setParameter("usernameParam", username).getSingleResult();   
 
             
@@ -54,6 +75,12 @@ public class UserDao {
         
         return false;
  
+    }
+    @UnitOfWork
+    public boolean createUser(User user){
+        EntityManager entityManager = entityManagerProvider.get();
+        entityManager.persist(user);
+        return true;
     }
 
 }

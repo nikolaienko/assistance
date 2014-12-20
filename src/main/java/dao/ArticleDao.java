@@ -99,7 +99,7 @@ public class ArticleDao {
         
         EntityManager entityManager = entitiyManagerProvider.get();
         
-        Query query = entityManager.createQuery("SELECT x FROM User x WHERE username = :usernameParam");
+        Query query = entityManager.createQuery("SELECT x FROM User x WHERE login = :usernameParam");
         User user = (User) query.setParameter("usernameParam", username).getSingleResult();
         
         if (user == null) {

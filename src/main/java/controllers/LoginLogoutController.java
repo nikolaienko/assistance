@@ -16,9 +16,14 @@
 
 package controllers;
 
+import models.Device;
+import models.LoginDTO;
+import models.UserDTO;
+import net.spy.memcached.MemcachedClient;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
+import ninja.cache.NinjaCache;
 import ninja.params.Param;
 
 import com.google.inject.Inject;
@@ -28,7 +33,8 @@ import dao.UserDao;
 
 @Singleton
 public class LoginLogoutController {
-    
+    @Inject
+    NinjaCache ninjaCache;
     @Inject
     UserDao userDao;
     
@@ -37,34 +43,37 @@ public class LoginLogoutController {
     // Login
     ///////////////////////////////////////////////////////////////////////////
     public Result login(Context context) {
-
         return Results.html();
 
     }
 
-    public Result loginPost(@Param("username") String username,
-                            @Param("password") String password,
-                            Context context) {
+    public Result loginPost(UserDTO user, Context context) {
 
-        boolean isUserNameAndPasswordValid = userDao.isUserAndPasswordValid(username, password);
+        boolean isUserNameAndPasswordValid = userDao.isUserAndPasswordValid(user.login, user.password);
         
         
         if (isUserNameAndPasswordValid) {
-            context.getSessionCookie().put("username", username);
+            context.getSessionCookie().put("username", user.login);
             context.getFlashCookie().success("login.loginSuccessful");
-            
-            return Results.redirect("/");
+            if (!userDao.isDeviceExist(user.login,user.deviceId))
+                userDao.pairDevice(user.login ,parceToDevice(user));
+            return Results.json().render(new LoginDTO(user.login,true));
             
         } else {
-            
             // something is wrong with the input or password not found.
-            context.getFlashCookie().put("username", username);
+            context.getFlashCookie().put("username", user.login);
             context.getFlashCookie().error("login.errorLogin");
-
-            return Results.redirect("/login");
+            return Results.json().render(new LoginDTO(user.login,false));
             
         }
         
+    }
+
+    private Device parceToDevice(UserDTO dto){
+        Device device = new Device();
+        device.lat = dto.lat;
+        device.lng = dto.lng;
+        return device;
     }
 
     ///////////////////////////////////////////////////////////////////////////

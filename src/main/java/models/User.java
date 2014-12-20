@@ -11,17 +11,17 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Long id;
-    public String username;
-    public String password;
-    public String fullname;
+    public String login;
+    public Long password;
+    public String fullName;
     public boolean isAdmin;
     
     public User() {}
     
-    public User(String username, String password, String fullname) {
-        this.username = username;
+    public User(String login, Long password, String fullName) {
+        this.login = login;
         this.password = password;
-        this.fullname = fullname;
+        this.fullName = fullName;
     }
  
 }
