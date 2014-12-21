@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import dao.AccidentDao;
 import dao.UserDao;
-import jdk.internal.util.xml.impl.ReaderUTF8;
 import logic.DistanceCalculator;
 import models.*;
 import ninja.Context;
