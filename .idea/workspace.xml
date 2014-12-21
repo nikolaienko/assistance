@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9b2cb0f7-5a68-47ec-b6b6-e36885921854" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AssistanceOnTheWay.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,8 +50,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39816514" vertical-offset="431" max-vertical-offset="3654">
-              <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.4972477" vertical-offset="431" max-vertical-offset="3780">
+              <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -629,12 +628,12 @@
       <workItem from="1419021257117" duration="12073000" />
       <workItem from="1419034097180" duration="15000" />
       <workItem from="1419034912417" duration="136000" />
-      <workItem from="1419188139753" duration="712000" />
+      <workItem from="1419188139753" duration="786000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20157000" />
+    <option name="totallyTimeSpent" value="20231000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="24" width="1368" height="745" extended-state="6" />
@@ -1123,8 +1122,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39816514" vertical-offset="431" max-vertical-offset="3654">
-          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.4972477" vertical-offset="431" max-vertical-offset="3780">
+          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
           <folding />
         </state>
       </provider>
