@@ -27,15 +27,12 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 import dao.ArticleDao;
-import dao.SetupDao;
-
 public class ApplicationController {
 
     @Inject
     ArticleDao articleDao;
 
-    @Inject
-    SetupDao setupDao;
+
 
     public ApplicationController() {
 
@@ -48,7 +45,7 @@ public class ApplicationController {
      */
     public Result setup() {
 
-        setupDao.setup();
+
 
         return Results.ok();
 
